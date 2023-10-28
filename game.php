@@ -540,8 +540,9 @@ div id="co" style="width:700px;height:70px;">
         <!-- Game Parameters -->        
         </div>
                     
-            </div>
-   <script type="text/javascript">
+      </div>
+      
+      <script type="text/javascript">
           function preventBack() {
               window.history.forward(); 
           }
@@ -676,10 +677,7 @@ div id="co" style="width:700px;height:70px;">
                           filter: "mean",
                           filter_size: 5,
                           onGazeCoordinates: function(x,y){
-                            const timeStamp = new Date().getTime();
-                            const dateTimeStamp = new Date().toISOString();
-                            // console.log(x + " " + y);
-                            trackingData.push({ x_axis: x, y_axis: y, timestamp: timeStamp, datetimestamp : dateTimeStamp });
+                            trackingData.push({ x_axis: x, y_axis: y, timestamp: new Date().getTime(), datetimestamp : new Date().toISOString() });
                           }
                       })
                   }
@@ -741,35 +739,37 @@ div id="co" style="width:700px;height:70px;">
               TobiiWeb_Client.stop()
           }
 
-</script> 
-    <?php 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-          // Get the JSON data sent from the client
-          $data = json_decode(file_get_contents('php://input'));
-      
-          if ($conn->connect_error) {
-              die("Connection failed: " . $conn->connect_error);
-          }
-      
-          // Loop through the received data and insert it into the MySQL database
-          foreach ($data as $item) {
-              $x_axis = $item->x_axis;
-              $y_axis = $item->y_axis;
-              $timestamp = $item->timestamp;
-              $datetimestamp = $item->datetimestamp;
-      
-              $sql = "INSERT INTO eyedata (userid, quesno, hintused, x_axis, y_axis, datetimestamp) VALUES ('$userid','$quesno','$hintused', '$x_axis', '$y_axis', '$datetimestamp')";
-      
-              if ($conn->query($sql) === TRUE) {
-                  echo "Data inserted successfully";
-              } else {
-                  echo "Error: " . $sql . "<br>" . $conn->error;
-              }
-          }
-      
-          $conn->close();
-      }
-    ?>
+        </script> 
+        <?php 
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Get the JSON data sent from the client
+                $data = json_decode(file_get_contents('php://input'));
+            
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                
+                $id = $_SESSION["uid"];
+                $quesno = $ques;
+                $hintused = null;
+                // Loop through the received data and insert it into the MySQL database
+                foreach ($data as $item) {
+                    $x_axis = $item->x_axis;
+                    $y_axis = $item->y_axis;
+                    $datetimestamp = $item->datetimestamp;
+            
+                    $sql = "INSERT INTO eyedata (id, quesno, hintused, x_axis, y_axis, datetimestamp) VALUES ('$id','$quesno','$hintused', '$x_axis', '$y_axis', '$datetimestamp')";
+            
+                    if ($conn->query($sql) === TRUE) {
+                        echo "Data inserted successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
+                }
+            
+                $conn->close();
+            }
+        ?>
     <!-- FOOTER without any links -->
     <?php include 'footer.php';?>
     
