@@ -208,12 +208,3 @@
         }
     }
 ?>
-
-<script text="text/javascript">
-    function startTobiiServer(){
-        console.log("inside startTobiiServer()");
-        var oShell = new ActiveXObject("Shell.Application");
-        var commandtoRun = "C:\\Users\\DELL\\Desktop\\Website\\game\\TobiiEyeX\\LocalServer\\TobiiWeb.exe"; 
-        oShell.ShellExecute(commandtoRun,"","","open","1");
-    }
-</script>
