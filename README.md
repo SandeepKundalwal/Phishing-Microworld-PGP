@@ -2,4 +2,4 @@
 
 <h2>Phishing Game Website for Post Graduate Project @IITMandi</h2>
 
-This repo contains the code for the Phishing Game Website made as part of Post Graduate Project @IITMandi.
+This repo contains the code for the Phishing Game Website made as part of my M.Tech Thesis titled <b>Investigating User Behaviour Towards Phishing Mail Using Eye Gaze Movement</b> at IIT Mandi.
