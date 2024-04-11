@@ -4,7 +4,7 @@
         <div class="col-lg-12">
             <ul class="nav nav-pills nav-justified">
                 <li>© 2022 ACSLab, IIT Mandi</li>
-                <li>Credits: Varun Dutt and Megha Sharma.</li>
+<!--                 <li>Credits: Varun Dutt and Megha Sharma.</li> -->
             </ul>
         </div>
     </div>
